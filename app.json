@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "Gardena",
+    "slug": "gardena",
+    "version": "0.1.0",
+    "scheme": "gardena",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.gardena",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.example.gardena",
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"],
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "@maplibre/maplibre-react-native",
+      "expo-build-properties",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Gardena uses your location only to centre the map on your garden when you ask it to."
+        }
+      ]
+    ]
+  }
+}
