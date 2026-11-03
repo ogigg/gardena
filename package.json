@@ -1,0 +1,48 @@
+{
+  "name": "gardena",
+  "version": "0.1.0",
+  "main": "index.ts",
+  "dependencies": {
+    "@expo/metro-runtime": "~58.0.16",
+    "@maplibre/maplibre-react-native": "^11.5.1",
+    "@photostructure/tz-lookup": "^11.7.0",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "earcut": "^3.2.4",
+    "eslint-config-expo": "~58.0.4",
+    "expo": "~58.0.22",
+    "expo-build-properties": "~58.0.12",
+    "expo-dev-client": "~58.0.18",
+    "expo-gl": "~58.0.4",
+    "expo-location": "~58.0.20",
+    "expo-status-bar": "~58.0.4",
+    "expo-system-ui": "~58.0.7",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-native": "0.88.1",
+    "react-native-safe-area-context": "~5.10.1",
+    "react-native-svg": "15.16.0",
+    "react-native-web": "~0.21.4",
+    "suncalc": "^2.1.1",
+    "three": "^0.166.1"
+  },
+  "devDependencies": {
+    "@types/react": "~19.3.0",
+    "@types/three": "^0.166.0",
+    "eslint": "^9.39.5",
+    "typescript": "~6.0.3",
+    "vitest": "^5.1.0"
+  },
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm run lint && npm run test",
+    "export:web": "expo export --platform web --output-dir dist",
+    "e2e:web": "npm run export:web && node tests/e2e/web-flows.js && node tests/e2e/web-states.js"
+  },
+  "private": true
+}
