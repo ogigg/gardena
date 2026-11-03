@@ -5,7 +5,7 @@ garden on aerial imagery, trace its outer boundary, and the outline becomes a
 standalone 3D garden. In 3D you can add beds, trees and buildings, and see
 modeled sun direction and shadows for any date and time.
 
-![Demo garden in 3D](docs/screenshots/03-demo-3d.png)
+![Demo garden in 3D](docs/images/demo-3d.png)
 
 ## What works
 
@@ -135,7 +135,7 @@ npm run check
 ```
 
 Headless browser run of the real UI (needs Playwright with Chromium). It
-writes screenshots to `docs/screenshots/`:
+writes screenshots to `tests/e2e/output/`:
 
 ```bash
 npm run e2e:web
@@ -199,18 +199,40 @@ npm run e2e:web
 ## Project layout
 
 ```
-App.tsx                    screen routing + cross-fades
-src/geo/                   types, local metric projection, polygon validation/stats/triangulation
-src/sun/                   sun position (suncalc) and garden-time zone handling
-src/providers/             imagery, geocoding, OSM obstacles (all provider URLs live here)
-src/map/                   MapSurface: MapLibre (native) / metric grid (web, demo, no imagery)
-src/three/                 GardenScene (three.js, testable in Node), camera rig, GL canvas + gestures
-src/screens/               Home, Map (find + draw), Garden (3D + sun/add/edit/info)
-src/storage, src/state     local persistence and the React store
-test/                      vitest suites + reference fixtures (and the Python scripts that made them)
-e2e/                       headless browser flows for the web build
-docs/                      provider research and screenshots
+index.ts                         Expo entry → src/App.tsx
+src/
+├── App.tsx                      providers (safe area, garden store) + router
+├── navigation/AppRouter.tsx     state-based routes and screen transitions
+├── features/                    one folder per user-facing feature
+│   ├── home/                    garden list, demo entry
+│   ├── find-garden/             search + draw the boundary
+│   │   ├── components/          SearchBar, SearchResults, DrawingOverlay, DrawingToolbar
+│   │   ├── hooks/               useBoundaryDraft (points, undo, validation), useAddressSearch
+│   │   └── map/                 MapSurface: MapLibre (native) / metric grid (web, demo, no imagery)
+│   └── garden-3d/               the 3D garden
+│       ├── components/          SunPanel, AddObjectPanel, ObjectEditor, ContextBuildingEditor,
+│       │                        GardenInfoPanel, CompassButton, OutlineMorph
+│       └── scene/               GardenScene (three.js, testable in Node), camera rig, GL canvas + gestures
+├── domain/                      pure TypeScript, no React or network
+│   ├── garden/                  types, create/edit garden records, demo garden
+│   ├── geometry/                local metric projection, polygon validation/stats/triangulation
+│   └── sun/                     sun position (suncalc), garden-time zone handling
+├── services/                    talks to the outside world; swappable
+│   ├── imagery/                 imagery providers (GUGiK, Esri opt-in, custom)
+│   ├── geocoding/               Geoapify, GUGiK UUG, fallback chain
+│   ├── obstacles/               OpenStreetMap buildings via Overpass
+│   └── storage/                 local persistence + React store
+└── shared/                      ui/ (one component per file, theme), hooks/, config/env.ts
+tests/
+├── fixtures/                    independent reference data (NREL SPA, pyproj, zoneinfo)
+└── e2e/                         headless browser flows for the web build (output/ is git-ignored)
+scripts/reference-data/          Python scripts that generate tests/fixtures
+docs/                            provider research, README images
 ```
+
+Unit tests sit next to the code they test (`*.test.ts`). ESLint enforces the
+layering: `src/domain` may not import React, Expo, `services`, `features` or
+`shared`, and features may not import each other.
 
 ## Known limitations
 

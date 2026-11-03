@@ -42,7 +42,7 @@
     "test": "vitest run",
     "check": "npm run typecheck && npm run lint && npm run test",
     "export:web": "expo export --platform web --output-dir dist",
-    "e2e:web": "npm run export:web && node e2e/web-flows.js && node e2e/web-states.js"
+    "e2e:web": "npm run export:web && node tests/e2e/web-flows.js && node tests/e2e/web-states.js"
   },
   "private": true
 }

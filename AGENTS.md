@@ -25,9 +25,12 @@ Run lint and typecheck before declaring any task done.
 
 ## Navigation & Routing
 
-- This prototype intentionally uses a small state-based router in `App.tsx` (three screens) so the
-  map → 3D hand-off animation can be staged precisely. Screens live in `src/screens/`.
-- Provider-specific code lives only in `src/providers/` and `src/map/`.
+- This prototype intentionally uses a small state-based router (`src/navigation/AppRouter.tsx`, three
+  screens) so the map → 3D hand-off animation can be staged precisely.
+- Folder roles: `src/features/<feature>/` (screens + their components/hooks), `src/domain/` (pure TS,
+  no React/network), `src/services/` (external I/O), `src/shared/` (ui, hooks, config).
+  Unit tests live next to the code as `*.test.ts`. ESLint enforces the layering.
+- Provider-specific code lives only in `src/services/` and `src/features/find-garden/map/`.
 - Run `npm run check` (typecheck + lint + unit tests) before declaring work done.
 
 ## Building with EAS

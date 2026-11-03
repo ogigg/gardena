@@ -150,7 +150,7 @@ geocoder output.
   implementation) over 33 daytime cases in Kraków, Gdańsk, Sydney, Reykjavík,
   Quito and New York. Measured maximum error: **0.007° altitude, 0.013°
   azimuth**. Sunrise, sunset and solar noon are within 2 minutes of SPA. See
-  `test/sun.test.ts` and `test/fixtures/spa-reference.json`.
+  `src/domain/sun/sun.test.ts` and `tests/fixtures/spa-reference.json`.
 - At a 10 m obstacle, 0.013° moves a shadow tip by millimetres, far below the
   error of the modeled geometry itself.
 
